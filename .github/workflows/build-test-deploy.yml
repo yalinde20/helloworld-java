@@ -23,6 +23,6 @@ jobs:
           # The path to a file containing the Java version to set up (.java-version, .tool-versions, .sdkmanrc). Used when java-version is not set. See examples of supported syntax in README file
           java-version-file: 17
           # Java distribution. See the list of supported distributions in README file. This input is required except when java-version-file points to .sdkmanrc with a recognized distribution suffix (e.g., java=21.0.5-tem).
-          distribution: 'Temurin'
+          distribution: 'temurin'
       - name : Build du jar
         run: mvn clean package -DskipTests
