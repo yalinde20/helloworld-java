@@ -1,0 +1,28 @@
+name: Déploiement
+
+on: 
+  workflow_dispatch:
+  push:
+    branches: main
+
+env:
+  DEPLOY_ENV: production
+  
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    name: Build and Cache dependancies
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+      - name: Setup Java JDK
+        uses: actions/setup-java@v6.2.0
+        with:
+          # The Java version to set up. Takes a whole or semver Java version, or the "latest" alias to use the newest available stable release. See examples of supported syntax in README file
+          java-version: 17
+          # The path to a file containing the Java version to set up (.java-version, .tool-versions, .sdkmanrc). Used when java-version is not set. See examples of supported syntax in README file
+          java-version-file: 17
+          # Java distribution. See the list of supported distributions in README file. This input is required except when java-version-file points to .sdkmanrc with a recognized distribution suffix (e.g., java=21.0.5-tem).
+          distribution: 'Temurin'
+      - name : Build du jar
+        run: mvn clean package -DskipTests
